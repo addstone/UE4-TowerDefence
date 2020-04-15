@@ -2,4 +2,14 @@
 
 
 #include "SelectLevel/TowerDefenceSelectLevelGameMode.h"
+#include "UI/SelectLevelUI/Core/SelectLevelHUD.h"
 
+ATowerDefenceSelectLevelGameMode::ATowerDefenceSelectLevelGameMode()
+{
+	HUDClass = ASelectLevelHUD::StaticClass();
+}
+
+void ATowerDefenceSelectLevelGameMode::BeginPlay()
+{
+
+}
