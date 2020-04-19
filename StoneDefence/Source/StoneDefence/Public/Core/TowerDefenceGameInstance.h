@@ -14,4 +14,6 @@ class STONEDEFENCE_API UTowerDefenceGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void Init() override;
 };

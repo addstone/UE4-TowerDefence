@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-SimpleScreenLoading.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\UE4Save\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\UE4Save\StoneDefence\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UE4Editor\Development\SimpleScreenLoading\SimpleScreenLoading.cpp.obj"
+"D:\UE4Save\StoneDefence\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UE4Editor\Development\SimpleScreenLoading\Default.rc2.res"
+/OUT:"D:\UE4Save\StoneDefence\Plugins\SimpleScreenLoading\Intermediate\Build\Win64\UE4Editor\Development\SimpleScreenLoading\UE4Editor-SimpleScreenLoading.lib"
+/INCLUDE:IMPLEMENT_MODULE_SimpleScreenLoading
