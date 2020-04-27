@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-SimpleTutoria.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\UE4Save\StoneDefence\Intermediate\Build\Win64\StoneDefenceEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"D:\UE4Save\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UE4Editor\Development\SimpleTutoria\Module.SimpleTutoria.cpp.obj"
+"D:\UE4Save\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UE4Editor\Development\SimpleTutoria\Module.SimpleTutoria.gen.cpp.obj"
+"D:\UE4Save\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UE4Editor\Development\SimpleTutoria\Default.rc2.res"
+/OUT:"D:\UE4Save\StoneDefence\Plugins\SimpleTutoria\Intermediate\Build\Win64\UE4Editor\Development\SimpleTutoria\UE4Editor-SimpleTutoria.lib"
+/INCLUDE:IMPLEMENT_MODULE_SimpleTutoria

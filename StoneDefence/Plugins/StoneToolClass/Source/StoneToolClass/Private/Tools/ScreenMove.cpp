@@ -1,6 +1,6 @@
 #include "Tools/ScreenMove.h"
 #include "GameFramework/PlayerController.h"
-#include "Math/UnrealMathUtility.h"
+#include "GameFramework/Pawn.h"
 
 bool FScreenMoveUnit::ListenScreenMove(APlayerController* PlayerController, const float &ScreenMoveSpeed)
 {
