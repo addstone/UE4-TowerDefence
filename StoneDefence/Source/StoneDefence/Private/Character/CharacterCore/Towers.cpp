@@ -2,4 +2,22 @@
 
 
 #include "Character/CharacterCore/Towers.h"
+#include "Components/StaticMeshComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "DestructibleComponent.h"
 
+ATowers::ATowers()
+{
+	StaticMeshBuilding = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingRange"));
+	DestructibleMeshBuilding = CreateDefaultSubobject<UDestructibleComponent>(TEXT("Substitube"));
+	ParticleMesh = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleMesh"));
+
+	StaticMeshBuilding->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	DestructibleMeshBuilding->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+}
+
+float ATowers::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+	
+}
