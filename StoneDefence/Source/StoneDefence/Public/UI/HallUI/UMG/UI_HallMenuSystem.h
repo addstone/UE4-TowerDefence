@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/Button.h"
 #include "UI/Core/UI_RuleOfTheWidget.h"
 #include "UI_HallMenuSystem.generated.h"
 
@@ -43,27 +44,12 @@ public:
 
 	virtual void NativeConstruct()override;
 
-	UFUNCTION()
-	void GameStart();
-
-	UFUNCTION()
-	void SecretTerritory();
-
-	UFUNCTION()
-	void History();
-
-	UFUNCTION()
-	void GameSettings();
-
-	UFUNCTION()
-	void TutorialWebsite();
-
-	UFUNCTION()
-	void Browser();
-
-	UFUNCTION()
-	void SpecialContent();
-
-	UFUNCTION()
-	void QuitGame();
+	void BindGameStart(FOnButtonClickedEvent ClickEvent);
+	void BindSecretTerritory(FOnButtonClickedEvent ClickEvent);
+	void BindHistory(FOnButtonClickedEvent ClickEvent);
+	void BindGameSettings(FOnButtonClickedEvent ClickEvent);
+	void BindTutorialWebsite(FOnButtonClickedEvent ClickEvent);
+	void BindBrowser(FOnButtonClickedEvent ClickEvent);
+	void BindSpecialContent(FOnButtonClickedEvent ClickEvent);
+	void BindQuit(FOnButtonClickedEvent ClickEvent);
 };
