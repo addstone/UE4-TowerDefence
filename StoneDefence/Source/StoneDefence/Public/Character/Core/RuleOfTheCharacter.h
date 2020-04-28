@@ -54,6 +54,10 @@ protected:
 	//是否为一个队伍
 	virtual bool IsTeam();
 
+public:
+	UFUNCTION(Blueprintable, BlueprintPure, Category = "Towers|Attribute")
+	bool IsActive() { return IsDeath(); };
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

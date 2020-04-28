@@ -29,6 +29,10 @@ class STONEDEFENCE_API ATowers : public ARuleOfTheCharacter
 public:
 	ATowers();
 
+	//Ðý×ª±äÁ¿
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttribute")
+	FRotator TowersRotator;
+
 protected:
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 };
