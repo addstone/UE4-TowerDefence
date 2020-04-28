@@ -59,7 +59,7 @@ protected:
 
 public:
 	UFUNCTION(Blueprintable, BlueprintPure, Category = "Towers|Attribute")
-	bool IsActive() { return IsDeath(); };
+	bool IsActive() { return !IsDeath(); };
 
 public:	
 	// Called every frame
