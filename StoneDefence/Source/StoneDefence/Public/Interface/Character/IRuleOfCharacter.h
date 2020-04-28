@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "../StoneDefenceType.h"
+
 
 class IRuleOfCharacter
 {
@@ -13,4 +15,6 @@ public:
 	virtual float GetMaxHealth() = 0;
 	//是否为一个队伍
 	virtual bool IsTeam() = 0;
+
+	virtual EGameCharacterType::Type GetType() = 0;
 };

@@ -23,6 +23,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "BlackBoard")
 	struct FBlackboardKeySelector BlackBoardKey_Distance;
 
+	UPROPERTY(EditAnywhere, Category = "BlackBoard")
+	struct FBlackboardKeySelector BlackBoardKey_TargetLocation;
+
 public:
 	virtual void OnGameplayTaskInitialized(UGameplayTask& Task) {}
 

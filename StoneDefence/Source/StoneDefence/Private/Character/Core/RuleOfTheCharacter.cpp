@@ -69,4 +69,8 @@ void ARuleOfTheCharacter::Tick(float DeltaTime)
 
 }
 
+EGameCharacterType::Type ARuleOfTheCharacter::GetType()
+{
+	return EGameCharacterType::Type::MAX;
+}
 

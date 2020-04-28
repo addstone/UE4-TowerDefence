@@ -7,6 +7,7 @@
 #include "Interface/Character/IRuleOfCharacter.h"
 #include "Core/TowerDefencePlayerController.h"
 #include "Core/TowerDefenceGameState.h"
+#include "../StoneDefenceType.h"
 #include "RuleOfTheCharacter.generated.h"
 
 UCLASS()
@@ -64,6 +65,8 @@ public:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	virtual EGameCharacterType::Type GetType();
 
 	//»ñÈ¡PlayerController
 	FORCEINLINE ATowerDefencePlayerController* GetGameController() { return GetWorld() ? GetWorld()->GetFirstPlayerController<ATowerDefencePlayerController>() : NULL; }

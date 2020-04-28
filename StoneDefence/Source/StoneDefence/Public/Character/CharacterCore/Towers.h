@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/Core/RuleOfTheCharacter.h"
+#include "../StoneDefenceType.h"
 #include "Towers.generated.h"
 
 /**
@@ -32,6 +33,8 @@ public:
 	//Ðý×ª±äÁ¿
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttribute")
 	FRotator TowersRotator;
+
+	virtual EGameCharacterType::Type GetType();
 
 protected:
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;

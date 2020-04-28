@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/Core/RuleOfTheCharacter.h"
+#include "../StoneDefenceType.h"
 #include "Monsters.generated.h"
 
 /**
@@ -16,4 +17,6 @@ class STONEDEFENCE_API AMonsters : public ARuleOfTheCharacter
 public:
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
+
+	virtual EGameCharacterType::Type GetType();
 };

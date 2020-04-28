@@ -21,7 +21,7 @@ void URuleOfAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		bAttack = RuleOfTheCharacter->bAttack;
 		Speed = RuleOfTheCharacter->GetVelocity().Size();
-		bDeath = RuleOfTheCharacter->IsActive();
+		bDeath = !RuleOfTheCharacter->IsActive();
 	}
 }
 

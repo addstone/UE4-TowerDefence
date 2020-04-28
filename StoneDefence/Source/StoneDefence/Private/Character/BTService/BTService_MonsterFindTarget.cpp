@@ -33,26 +33,30 @@ void UBTService_MonsterFindTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 				}
 				if (Target.IsValid())
 				{
-					if (Target.IsActive())
+					if (Target->IsActive())
 					{
+						FVector location11 = Target.Get()->GetActorLocation();
 						BlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, Target.Get());
+						BlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, Target.Get()->GetActorLocation());
 					}
 					else
 					{
 						BlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, NULL);
+						BlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, FVector::ZeroVector);
 					}
 				}
 				else
 				{
 					BlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, NULL);
+					BlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, FVector::ZeroVector);
 				}
 			}
 
 			if (Target.IsValid())
 			{
 				FVector MonsterLocation = MonsterAIController->GetPawn()->GetActorLocation();
-				FVector TMDidtance = MonsterLocation - Target->GetActorLocation();
-				if (TMDidtance.Size() > 2200)
+				FVector TMDistance = MonsterLocation - Target->GetActorLocation();
+				if (TMDistance.Size() > 2200)
 				{
 					ARuleOfTheCharacter* Monster = Cast<ARuleOfTheCharacter>(MonsterAIController->GetPawn());
 					if (Monster)
@@ -60,7 +64,7 @@ void UBTService_MonsterFindTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 						Monster->bAttack = false;
 					}
 				}
-				BlackBoard->SetValueAsFloat(BlackBoardKey_Distance.SelectedKeyName, TMDidtance.Size());
+				BlackBoard->SetValueAsFloat(BlackBoardKey_Distance.SelectedKeyName, TMDistance.Size());
 			}
 			else
 			{
