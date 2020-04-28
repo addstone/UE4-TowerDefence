@@ -30,6 +30,9 @@ class STONEDEFENCE_API ARuleOfTheCharacter : public ACharacter, public IRuleOfCh
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BaseAttribute", meta = (AllowPrivateAccess = true))
 	class USceneComponent* HomingPoint;
 
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Attribute")
+	bool bAttack;
 
 public:
 	// Sets default values for this character's properties
