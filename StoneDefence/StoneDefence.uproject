@@ -3,18 +3,24 @@
 	"EngineAssociation": "4.24",
 	"Category": "",
 	"Description": "",
-	"Modules": [
-		{
-			"Name": "StoneDefence",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine",
-				"UMG",
-				"AIModule",
-				"StoneToolClass",
-				"CoreUObject"
-			]
-		}
-	]
+  "Modules": [
+    {
+      "Name": "StoneDefence",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "UMG",
+        "AIModule",
+        "StoneToolClass",
+        "CoreUObject"
+      ]
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "ApexDestruction",
+      "Enabled":  true
+    }
+  ]
 }
