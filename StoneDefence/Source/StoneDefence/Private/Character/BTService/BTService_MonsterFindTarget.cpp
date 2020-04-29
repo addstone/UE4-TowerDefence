@@ -12,7 +12,7 @@ void UBTService_MonsterFindTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 	
-	AMonsterAIController* MonsterAIController = Cast<AMonsterAIController>(OwnerComp.GetOwner());
+	ARuleOfTheAIController* MonsterAIController = Cast<ARuleOfTheAIController>(OwnerComp.GetOwner());
 	UBlackboardComponent* BlackBoard = OwnerComp.GetBlackboardComponent();
 
 	if (MonsterAIController)

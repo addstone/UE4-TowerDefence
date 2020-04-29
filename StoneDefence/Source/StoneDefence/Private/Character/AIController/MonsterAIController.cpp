@@ -4,43 +4,14 @@
 #include "Character/AIController/MonsterAIController.h"
 #include "Character/CharacterCore/Towers.h"
 #include "EngineUtils.h"
+#include "../StoneDefenceUtils.h"
 
 using namespace std;
 
 AActor * AMonsterAIController::FindTarget()
 {
-	auto GetCloestTower = [&](const TArray<ATowers*> &MyTowers) -> ATowers*
-	{
-		if (MyTowers.Num() > 0)
-		{
-			float TowerTargetDistance = 99999999;
-			int32 TowerIndex = INDEX_NONE;
-			FVector MyLocation = GetPawn()->GetActorLocation();
-			for (int32 i = 0 ; i < MyTowers.Num(); i++)
-			{
-				if (ATowers* TowerCharacter = MyTowers[i])
-				{
-					FVector TowerLoaction = TowerCharacter->GetActorLocation();
-					FVector TMDistance = TowerLoaction - MyLocation;
-					float TowerAndMonsterDistance = TMDistance.Size();
-
-					if (TowerAndMonsterDistance < TowerTargetDistance)
-					{
-						TowerIndex = i;
-						TowerTargetDistance = TowerAndMonsterDistance;
-					}
-				}
-			}
-			if (TowerIndex != INDEX_NONE)
-			{
-				return MyTowers[TowerIndex];
-			}
-		}
-		return NULL;
-	};
-
-	TArray<ATowers*> TargetMainTowersArray;
-	TArray<ATowers*> TargetTowersArray;
+	TArray<ARuleOfTheCharacter*> TargetMainTowersArray;
+	TArray<ARuleOfTheCharacter*> TargetTowersArray;
 
 	for (TActorIterator<ATowers> it(GetWorld(), ATowers::StaticClass()); it; ++it)
 	{
@@ -58,8 +29,8 @@ AActor * AMonsterAIController::FindTarget()
 		}
 	}
 
-	ATowers* MainTower = GetCloestTower(TargetMainTowersArray);
-	ATowers* NormalTower = GetCloestTower(TargetTowersArray);
+	ATowers* MainTower = Cast<ATowers>(StoneDefenceUtils::FindCloestTarget(TargetMainTowersArray, GetPawn()->GetActorLocation()));
+	ATowers* NormalTower = Cast<ATowers>(StoneDefenceUtils::FindCloestTarget(TargetTowersArray, GetPawn()->GetActorLocation()));
 
 	if (MainTower)
 	{
