@@ -17,8 +17,3 @@ EGameCharacterType::Type AMonsters::GetType()
 {
 	return EGameCharacterType::Type::MONSTER;
 }
-
-bool AMonsters::IsTeam()
-{
-	return false;
-}

@@ -29,19 +29,19 @@ void UAnimNotify_SpawnBullet::Notify(USkeletalMeshComponent* MeshComp, UAnimSequ
 #if WITH_EDITOR
 	FVector ComponentLocation = MeshComp->GetSocketLocation(InSocketName);
 	FRotator ComponentRotation = MeshComp->GetSocketRotation(InSocketName);
-	if (APawn* Character = Cast<APawn>(MeshComp->GetOuter()))
 #else
 	FVector ComponentLocation = Character->GetFirePoint()->GetComponentLocation();
 	FRotator ComponentRotation = Character->GetFirePoint()->GetComponentRotation();
-	if (ARuleOfTheCharacter* Character = Cast<ARuleOfTheCharacter>(MeshComp->GetOuter()))
 #endif
+	if (AActor* Character = Cast<AActor>(MeshComp->GetOuter()))
 	{
 		FTransform TransForm;
 		TransForm.SetLocation(ComponentLocation);
 		TransForm.SetRotation(ComponentRotation.Quaternion());
 
 		FActorSpawnParameters ActorSpawnParamaters;
-		ActorSpawnParamaters.Instigator = Character;
+
+		ActorSpawnParamaters.Instigator = Cast<APawn>(Character);
 
 		if (ARuleOfTheBullet* Bullet = Character->GetWorld()->SpawnActor<ARuleOfTheBullet>(BulletClass, TransForm, ActorSpawnParamaters))
 		{

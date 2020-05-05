@@ -19,5 +19,4 @@ public:
 	void Tick(float DeltaTime) override;
 
 	virtual EGameCharacterType::Type GetType();
-	virtual bool IsTeam();
 };
