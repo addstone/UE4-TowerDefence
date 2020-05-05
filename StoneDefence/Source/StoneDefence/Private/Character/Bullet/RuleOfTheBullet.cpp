@@ -9,6 +9,7 @@
 #include "Character/Core/RuleOfTheCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/DamageType.h"
+#include "Character/AIController/RuleOfTheAIController.h"
 
 // Sets default values
 ARuleOfTheBullet::ARuleOfTheBullet()
@@ -47,10 +48,23 @@ void ARuleOfTheBullet::BeginPlay()
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OpenFireParticle, GetActorLocation());
 		break;
 	case EBulletType::BULLET_TRACK_LINE:
+	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OpenFireParticle, GetActorLocation());
 		ProjectileMovement->bIsHomingProjectile = true;
 		ProjectileMovement->bRotationFollowsVelocity = true;
+		if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(Instigator))
+		{
+			if (ARuleOfTheAIController* InstigatorController = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+			{
+				if (ARuleOfTheCharacter* TargetCharacter = InstigatorController->Target.Get())
+				{
+					ProjectileMovement->HomingAccelerationMagnitude = 4000.0f;
+					ProjectileMovement->HomingTargetComponent = TargetCharacter->GetHomingPoint();
+				}
+			}
+		}
 		break;
+	}
 	case EBulletType::BULLET_RANGE:
 		ProjectileMovement->StopMovementImmediately();
 		break;
@@ -77,6 +91,13 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamageParticle, SweepResult.Location);
 				
 					UGameplayStatics::ApplyDamage(OtherCharacter, 100.0f, InstigatorCharacter->GetController(), InstigatorCharacter, UDamageType::StaticClass());
+				}
+				switch (BulletType)
+				{
+				case EBulletType::BULLET_LINE:
+				case EBulletType::BULLET_TRACK_LINE:
+					Destroy();
+					break;
 				}
 			}
 		}

@@ -79,7 +79,7 @@ void ATowerAIController::BTService_FindTarget()
 	}
 }
 
-void ATowerAIController::AttackTarget(ARuleOfTheCharacter* InTarget)
+void ATowerAIController::AttackTarget(ARuleOfTheCharacter* Target1)
 {
 	if (ATowers* Tower = GetPawn<ATowers>())
 	{

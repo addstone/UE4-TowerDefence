@@ -22,23 +22,23 @@ void UBTService_MonsterFindTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 			ARuleOfTheCharacter* NewTarget = Cast<ARuleOfTheCharacter>(MonsterAIController->FindTarget());
 			if (NewTarget)
 			{
-				if (MonsterAIController->Target != NewTarget)
+				if (Target != NewTarget)
 				{
 					ARuleOfTheCharacter* MonsterSelf = Cast<ARuleOfTheCharacter>(MonsterAIController->GetPawn());
 					if (MonsterSelf)
 					{
 						MonsterSelf->GetCharacterMovement()->StopMovementImmediately();
 					}
-					MonsterAIController->Target = NewTarget;
+					Target = NewTarget;
 				}
-				if (MonsterAIController->Target.IsValid())
+				if (Target.IsValid())
 				{
-					if (MonsterAIController->Target->IsActive())
+					if (Target->IsActive())
 					{
-						FVector NewTargetV = MonsterAIController->GetPawn()->GetActorLocation() - MonsterAIController->Target.Get()->GetActorLocation();
+						FVector NewTargetV = MonsterAIController->GetPawn()->GetActorLocation() - Target.Get()->GetActorLocation();
 						NewTargetV.Normalize();
-						FVector NextLocation = NewTargetV * 800.f + MonsterAIController->Target.Get()->GetActorLocation();
-						BlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, MonsterAIController->Target.Get());
+						FVector NextLocation = NewTargetV * 800.f + Target.Get()->GetActorLocation();
+						BlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, Target.Get());
 						BlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, NextLocation);
 					}
 					else
@@ -54,10 +54,10 @@ void UBTService_MonsterFindTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 				}
 			}
 
-			if (MonsterAIController->Target.IsValid())
+			if (Target.IsValid())
 			{
 				FVector MonsterLocation = MonsterAIController->GetPawn()->GetActorLocation();
-				FVector TMDistance = MonsterLocation - MonsterAIController->Target->GetActorLocation();
+				FVector TMDistance = MonsterLocation - Target->GetActorLocation();
 				if (TMDistance.Size() > 2200)
 				{
 					ARuleOfTheCharacter* Monster = Cast<ARuleOfTheCharacter>(MonsterAIController->GetPawn());

@@ -6,6 +6,8 @@
 #include "EngineUtils.h"
 #include "../StoneDefenceUtils.h"
 
+using namespace std;
+
 AActor * AMonsterAIController::FindTarget()
 {
 	TArray<ARuleOfTheCharacter*> TargetMainTowersArray;
@@ -38,7 +40,7 @@ AActor * AMonsterAIController::FindTarget()
 	return NormalTower;
 }
 
-void AMonsterAIController::AttackTarget(ARuleOfTheCharacter* InTarget)
+void AMonsterAIController::AttackTarget(ARuleOfTheCharacter* Target)
 {
 
 }

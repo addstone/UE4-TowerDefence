@@ -24,7 +24,7 @@ protected:
 
 	void BTService_FindTarget();
 
-	virtual void AttackTarget(ARuleOfTheCharacter* InTarget);
+	virtual void AttackTarget(ARuleOfTheCharacter* Target);
 	//¥Ê¥¢π÷ŒÔ
 	UPROPERTY()
 	TArray<ARuleOfTheCharacter*> TArrayMonsters;

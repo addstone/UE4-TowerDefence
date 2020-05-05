@@ -16,9 +16,5 @@ class STONEDEFENCE_API ARuleOfTheAIController : public AAIController
 public:
 
 	virtual AActor *FindTarget() { return nullptr; };
-	virtual void AttackTarget(ARuleOfTheCharacter* InTarget) {};
-
-public:
-	TWeakObjectPtr<class ARuleOfTheCharacter> Target;
-
+	virtual void AttackTarget(ARuleOfTheCharacter* Target) {};
 };

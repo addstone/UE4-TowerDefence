@@ -15,6 +15,5 @@ class STONEDEFENCE_API AMonsterAIController : public ARuleOfTheAIController
 
 public:
 	virtual AActor *FindTarget();
-
-	virtual void AttackTarget(ARuleOfTheCharacter* InTarget);
+	virtual void AttackTarget(ARuleOfTheCharacter* Target);
 };
