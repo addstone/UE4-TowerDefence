@@ -10,6 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/DamageType.h"
 #include "Character/AIController/RuleOfTheAIController.h"
+#include "EngineUtils.h"
 
 // Sets default values
 ARuleOfTheBullet::ARuleOfTheBullet()
@@ -65,9 +66,38 @@ void ARuleOfTheBullet::BeginPlay()
 		}
 		break;
 	}
-	case EBulletType::BULLET_RANGE:
-		ProjectileMovement->StopMovementImmediately();
+	case EBulletType::BULLET_RANGE_LINE:
 		break;
+	case EBulletType::BULLET_RANGE:
+	{
+		ProjectileMovement->StopMovementImmediately();
+		if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(Instigator))
+		{
+			TArray<AActor*> IgnoreActors;
+			//TArray<AActor*> TargetActors;
+			for (TActorIterator<ARuleOfTheCharacter> it(GetWorld(), ARuleOfTheCharacter::StaticClass()); it; ++it)
+			{
+				if (ARuleOfTheCharacter* TheCharacter = *it)
+				{
+					FVector VDistance = TheCharacter->GetActorLocation() - InstigatorCharacter->GetActorLocation();
+					if (VDistance.Size() <= 1400.f)
+					{
+						if (TheCharacter->IsTeam() == InstigatorCharacter->IsTeam())
+						{
+							IgnoreActors.Add(TheCharacter);
+						}
+						else
+						{
+							UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamageParticle, TheCharacter->GetActorLocation());
+							//TargetActors.Add(TheCharacter);
+						}
+					}
+				}	
+			}
+			UGameplayStatics::ApplyRadialDamageWithFalloff(GetWorld(), 100.f, 10.f, GetActorLocation(), 400.f, 1000.f, 0.5f, UDamageType::StaticClass(), IgnoreActors, Instigator);
+		}
+		break;
+	}		
 	case EBulletType::BULLET_CHAIN:
 		ProjectileMovement->StopMovementImmediately();
 		BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);

@@ -24,4 +24,5 @@ enum class EBulletType :uint8
 	BULLET_TRACK_LINE,//¸ú×Ù
 	BULLET_RANGE,//·¶Î§ÉËº¦
 	BULLET_CHAIN,
+	BULLET_RANGE_LINE,
 };

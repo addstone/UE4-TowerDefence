@@ -27,7 +27,7 @@ public:
 	// Sets default values for this actor's properties
 	ARuleOfTheBullet();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Bullet")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite, Category = "Bullet")
 	TEnumAsByte<EBulletType> BulletType;
 
 	//×Óµ¯ÉËº¦ÌØÐ§
