@@ -6,6 +6,7 @@
 #include "EngineUtils.h"
 #include "Character/CharacterCore/Monsters.h"
 #include "../StoneDefenceUtils.h"
+#include "Character/Core/RuleOfTheCharacter.h"
 
 ATowerAIController::ATowerAIController()
 {
@@ -73,14 +74,22 @@ void ATowerAIController::BTService_FindTarget()
 				}
 			}
 
-			if (TArrayMonsters.Num() > 0)
-			{
-				Tower->bAttack = true;
-			}
-			else
-			{
-				Tower->bAttack = false;
-			}
+			AttackTarget(Target.Get());
+		}
+	}
+}
+
+void ATowerAIController::AttackTarget(ARuleOfTheCharacter* Target1)
+{
+	if (ATowers* Tower = GetPawn<ATowers>())
+	{
+		if (TArrayMonsters.Num() > 0)
+		{
+			Tower->bAttack = true;
+		}
+		else
+		{
+			Tower->bAttack = false;
 		}
 	}
 }

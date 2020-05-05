@@ -39,3 +39,8 @@ AActor * AMonsterAIController::FindTarget()
 
 	return NormalTower;
 }
+
+void AMonsterAIController::AttackTarget(ARuleOfTheCharacter* Target)
+{
+
+}

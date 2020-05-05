@@ -6,9 +6,8 @@
 #include "AIController.h"
 #include "RuleOfTheAIController.generated.h"
 
-/**
- * 
- */
+class ARuleOfTheCharacter;
+
 UCLASS()
 class STONEDEFENCE_API ARuleOfTheAIController : public AAIController
 {
@@ -17,4 +16,5 @@ class STONEDEFENCE_API ARuleOfTheAIController : public AAIController
 public:
 
 	virtual AActor *FindTarget() { return nullptr; };
+	virtual void AttackTarget(ARuleOfTheCharacter* Target) {};
 };

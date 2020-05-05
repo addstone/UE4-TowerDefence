@@ -39,7 +39,7 @@ void UBTService_MonsterFindTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 						NewTargetV.Normalize();
 						FVector NextLocation = NewTargetV * 800.f + Target.Get()->GetActorLocation();
 						BlackBoard->SetValueAsObject(BlackBoardKey_Target.SelectedKeyName, Target.Get());
-						BlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, NextLocation);
+						BlackBoard->SetValueAsVector(BlackBoardKey_TargetLocation.SelectedKeyName, Target.Get()->GetActorLocation());
 					}
 					else
 					{
