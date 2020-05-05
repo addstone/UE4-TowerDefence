@@ -15,3 +15,13 @@ namespace EGameCharacterType
 		MAX
 	};
 }
+
+UENUM(BlueprintType)
+enum class EBulletType :uint8
+{
+	BULLET_DIRECT_LINE, //ÎÞÕÏ°­Ö±Ïß¹¥»÷
+	BULLET_LINE,//·Ç¸ú×Ù
+	BULLET_TRACK_LINE,//¸ú×Ù
+	BULLET_RANGE,//·¶Î§ÉËº¦
+	BULLET_CHAIN,
+};

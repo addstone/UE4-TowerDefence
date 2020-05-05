@@ -5,10 +5,6 @@
 #include "Components/SphereComponent.h"
 #include "Components/SceneComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "../StoneDefenceType.h"
-#include "Character/Core/RuleOfTheCharacter.h"
-#include "Kismet/GameplayStatics.h"
-#include "GameFramework/DamageType.h"
 
 // Sets default values
 ARuleOfTheBullet::ARuleOfTheBullet()
@@ -29,8 +25,6 @@ ARuleOfTheBullet::ARuleOfTheBullet()
 	ProjectileMovement->UpdatedComponent = BoxDamage;
 
 	InitialLifeSpan = 4.0f;
-
-	BulletType = EBulletType::BULLET_DIRECT_LINE;
 }
 
 // Called when the game starts or when spawned
@@ -38,46 +32,12 @@ void ARuleOfTheBullet::BeginPlay()
 {
 	Super::BeginPlay();
 
-	switch (BulletType)
-	{
-	case EBulletType::BULLET_DIRECT_LINE:
-		break;
-	case EBulletType::BULLET_LINE:
-		break;
-	case EBulletType::BULLET_TRACK_LINE:
-		ProjectileMovement->bIsHomingProjectile = true;
-		ProjectileMovement->bRotationFollowsVelocity = true;
-		break;
-	case EBulletType::BULLET_RANGE:
-		ProjectileMovement->StopMovementImmediately();
-		break;
-	case EBulletType::BULLET_CHAIN:
-		ProjectileMovement->StopMovementImmediately();
-		BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		break;
-	}
-
 	BoxDamage->OnComponentBeginOverlap.AddUniqueDynamic(this, &ARuleOfTheBullet::BeginOverlap);
 }
 
 void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(Instigator))
-	{
-		if (ARuleOfTheCharacter* OtherCharacter = Cast<ARuleOfTheCharacter>(OtherActor))
-		{
-			if (InstigatorCharacter->IsTeam() != OtherCharacter->IsTeam())
-			{
-				if (OtherCharacter->IsActive())
-				{
-					//生成伤害特效
-					UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DamageParticle, SweepResult.Location);
-				
-					UGameplayStatics::ApplyDamage(OtherCharacter, 100.0f, InstigatorCharacter->GetController(), InstigatorCharacter, UDamageType::StaticClass());
-				}
-			}
-		}
-	}
+
 }
 
 // Called every frame

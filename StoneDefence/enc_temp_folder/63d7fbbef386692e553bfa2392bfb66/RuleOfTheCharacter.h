@@ -46,11 +46,6 @@ protected:
 	//接受伤害
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-public:
-	UFUNCTION(Blueprintable, BlueprintPure, Category = "Towers|Attribute")
-	bool IsActive() { return !IsDeath(); };
-
-public:	
 	//是否死亡
 	virtual bool IsDeath();
 
@@ -63,6 +58,11 @@ public:
 	//是否为一个队伍
 	virtual bool IsTeam();
 
+public:
+	UFUNCTION(Blueprintable, BlueprintPure, Category = "Towers|Attribute")
+	bool IsActive() { return !IsDeath(); };
+
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
