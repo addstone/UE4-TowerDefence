@@ -11,6 +11,8 @@
 #include "GameFramework/DamageType.h"
 #include "Character/AIController/RuleOfTheAIController.h"
 #include "EngineUtils.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/ArrowComponent.h"
 
 // Sets default values
 ARuleOfTheBullet::ARuleOfTheBullet()
@@ -99,9 +101,21 @@ void ARuleOfTheBullet::BeginPlay()
 		break;
 	}		
 	case EBulletType::BULLET_CHAIN:
+	{
 		ProjectileMovement->StopMovementImmediately();
 		BoxDamage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(Instigator))
+		{
+			if (ARuleOfTheAIController* InstigatorController = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+			{
+				if (ARuleOfTheCharacter* TargetCharacter = InstigatorController->Target.Get())
+				{
+					UGameplayStatics::SpawnEmitterAttached(DamageParticle, TargetCharacter->GetHomingPoint());
+				}
+			}
+		}
 		break;
+	}
 	}
 
 	BoxDamage->OnComponentBeginOverlap.AddUniqueDynamic(this, &ARuleOfTheBullet::BeginOverlap);
@@ -138,6 +152,24 @@ void ARuleOfTheBullet::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 void ARuleOfTheBullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (ARuleOfTheCharacter* InstigatorCharacter = Cast<ARuleOfTheCharacter>(Instigator))
+	{
+		if (ARuleOfTheAIController* InstigatorController = Cast<ARuleOfTheAIController>(InstigatorCharacter->GetController()))
+		{
+			if (ARuleOfTheCharacter* TargetCharacter = InstigatorController->Target.Get())
+			{
+				TArray<USceneComponent*> SceneComponent;
+				RootComponent->GetChildrenComponents(true, SceneComponent);
+				for (auto & Tmp : SceneComponent)
+				{
+					if (UParticleSystemComponent *ParticleSystem = Cast<UParticleSystemComponent>(Tmp))
+					{
+						ParticleSystem->SetBeamSourcePoint(0, InstigatorCharacter->GetFirePoint()->GetComponentLocation(), 0);
+						ParticleSystem->SetBeamTargetPoint(0, TargetCharacter->GetHomingPoint()->GetComponentLocation(), 0);
+					}
+				}
+			}
+		}
+	}
 }
 
